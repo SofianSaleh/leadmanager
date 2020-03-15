@@ -5,7 +5,7 @@ from .serializers import LeadSerializer
 # Lead Viewset
 
 class LeadViewset(viewsets.ModelViewSet):
-    queryset = Lead.object.all()
+    queryset = Lead.objects.all()
     permission_classes = [
         # Gonna be chabged to only the user
         permissions.AllowAny
