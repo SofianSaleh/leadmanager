@@ -1,0 +1,3 @@
+Migrations for 'leads':
+  leads\migrations\0001_initial.py
+    - Create model Lead
