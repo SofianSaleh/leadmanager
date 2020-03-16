@@ -32,6 +32,16 @@ export class Form extends Component {
               value={email}
             />
           </div>
+          <div className="form-group">
+            <label>Message</label>
+            <textarea
+              className="form-control"
+              type="text"
+              name="message"
+              onChange={this.onChange}
+              value={message}
+            />
+          </div>
         </form>
       </div>
     );
