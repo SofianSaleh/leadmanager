@@ -1,24 +1,44 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { addLead } from "../../actions/leads";
 
 export class Form extends Component {
+  static propType = {
+    addLead: PropTypes.func.isRequired
+  };
+
   state = {
     name: "",
     email: "",
     message: ""
   };
+
+  onChange(e) {
+    console.log(this);
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const { name, email, message } = this.state;
+    const lead = { name, email, message };
+    this.props.addLead(lead);
+  }
+
   render() {
     const { name, email, message } = this.state;
     return (
       <div className="card card-body mt-4 mb-4">
         <h2>Add Lead</h2>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onSubmit.bind(this)}>
           <div className="form-group">
             <label>Name</label>
             <input
               className="form-control"
               type="text"
               name="name"
-              onChange={this.onChange}
+              onChange={this.onChange.bind(this)}
               value={name}
             />
           </div>
@@ -28,7 +48,7 @@ export class Form extends Component {
               className="form-control"
               type="email"
               name="email"
-              onChange={this.onChange}
+              onChange={this.onChange.bind(this)}
               value={email}
             />
           </div>
@@ -38,7 +58,7 @@ export class Form extends Component {
               className="form-control"
               type="text"
               name="message"
-              onChange={this.onChange}
+              onChange={this.onChange.bind(this)}
               value={message}
             />
           </div>
@@ -53,4 +73,4 @@ export class Form extends Component {
   }
 }
 
-export default Form;
+export default connect(null, { addLead })(Form);
