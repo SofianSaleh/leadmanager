@@ -22,6 +22,16 @@ export class Form extends Component {
               value={name}
             />
           </div>
+          <div className="form-group">
+            <label>Email</label>
+            <input
+              className="form-control"
+              type="email"
+              name="email"
+              onChange={this.onChange}
+              value={email}
+            />
+          </div>
         </form>
       </div>
     );
