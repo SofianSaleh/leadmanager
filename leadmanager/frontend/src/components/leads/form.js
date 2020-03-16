@@ -7,6 +7,7 @@ export class Form extends Component {
     message: ""
   };
   render() {
+    const { name, email, message } = this.state;
     return (
       <div>
         <h1>Add Leads Form</h1>
