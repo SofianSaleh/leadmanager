@@ -42,6 +42,11 @@ export class Form extends Component {
               value={message}
             />
           </div>
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     );
