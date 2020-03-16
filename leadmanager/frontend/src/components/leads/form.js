@@ -9,8 +9,20 @@ export class Form extends Component {
   render() {
     const { name, email, message } = this.state;
     return (
-      <div>
-        <h1>Add Leads Form</h1>
+      <div className="card card-body mt-4 mb-4">
+        <h2>Add Lead</h2>
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label>Name</label>
+            <input
+              className="form-control"
+              type="text"
+              name="name"
+              onChange={this.onChange}
+              value={name}
+            />
+          </div>
+        </form>
       </div>
     );
   }
