@@ -1,24 +1,24 @@
-import React, { Component } from 'react'
-import { Link} from 'react-router-dom'
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class Login extends Component {
-    state = {
-        username = '',
-        password: ''
-    }
+  state = {
+    username: "",
+    password: ""
+  };
 
-onSubmit(e){
-    e.preventDefault()
-    console.log(this.state)
-}
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(this.state);
+  }
 
-onChange(e){
-    this.setState({[e.target.name] : e.target.value})
-}
-    render() {
-        const { usrname, email, password, confirmPassword } = this.state
-        return (
-            <div className="col-md-6 m-auto">
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+  render() {
+    const { username, email, password, confirmPassword } = this.state;
+    return (
+      <div className="col-md-6 m-auto">
         <div className="card card-body mt-5">
           <h2 className="text-center">Login</h2>
           <form onSubmit={this.onSubmit}>
@@ -32,7 +32,7 @@ onChange(e){
                 value={username}
               />
             </div>
-            
+
             <div className="form-group">
               <label>Password</label>
               <input
@@ -54,5 +54,6 @@ onChange(e){
           </form>
         </div>
       </div>
-    }
+    );
+  }
 }
