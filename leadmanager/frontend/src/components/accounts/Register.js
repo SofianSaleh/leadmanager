@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link} from 'react-router-dom'
 
 export default class Register extends Component {
     state = {
@@ -7,6 +8,16 @@ export default class Register extends Component {
         password: '',
         confirmPassword: ''
     }
+
+onSubmit(e){
+    e.preventDefault()
+    console.log(this.state)
+}
+
+onChange(e){
+    this.setState({[e.target.name] : e.target.value})
+}
+
     render() {
         const { usrname, email, password, confirmPassword } = this.state
         return (
