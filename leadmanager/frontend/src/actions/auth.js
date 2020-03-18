@@ -35,3 +35,35 @@ export const loadUser = () => (dispatch, getState) => {
       dispatch({ type: AUTH_ERROR });
     });
 };
+
+export const loadUser = () => (dispatch, getState) => {
+  // User Loading
+  dispatch({ type: USER_LOADING });
+
+  //   get Token
+  const token = getState().auth.token;
+
+  // Headers
+  const config = {
+    "Content-Type": "application/json"
+  };
+
+  //   if Token exists add to headers
+
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+  }
+
+  axios
+    .get("/api/auth/user/", config)
+    .then(res => {
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({ type: AUTH_ERROR });
+    });
+};
