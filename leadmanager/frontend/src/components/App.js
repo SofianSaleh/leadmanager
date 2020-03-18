@@ -34,7 +34,7 @@ class App extends Component {
               <Alerts />
               <div className="container">
                 <Switch>
-                  <Route exact path="/" Component={Dashboard} />
+                  <Route exact path="/" component={Dashboard} />
                 </Switch>
               </div>
             </Fragment>
