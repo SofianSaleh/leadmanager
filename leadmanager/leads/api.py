@@ -11,9 +11,11 @@ class LeadViewset(viewsets.ModelViewSet):
         # permissions.AllowAny
         permissions.IsAuthenticated
     ]
+
+    serializer_class = LeadSerializer
+    
     def getQuerySet(self):
         return self.request.user.leads.all()
-    serializer_class = LeadSerializer
 
     def perform_destroy(self, serializer):
         serializer.save(owner=self.request.user)
