@@ -22,7 +22,16 @@ export const loadUser = () => (dispatch, getState) => {
     config.headers["Authorization"] = `Token ${token}`;
   }
 
-  axios.get("/api/auth/user/", config).then(res => {
-    dispatch({ type: USER_LOADED, payload: res.data });
-  });
+  axios
+    .get("/api/auth/user/", config)
+    .then(res => {
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({ type: AUTH_ERROR });
+    });
 };
