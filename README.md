@@ -7,4 +7,6 @@ A simple Project that intends to teach Django, Django Rest Framework, React, Red
 `npm run dev`
 `python leadmanager/manage.py runserver`
 
-### Don't forget to download the dependencies
+### Don't forget to download the dependencies and run the comand
+
+`pipenv shell`
