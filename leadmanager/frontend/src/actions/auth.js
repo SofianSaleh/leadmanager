@@ -4,7 +4,8 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_FAIL,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS
 } from "../actions/types";
 import { returnErrors } from "./messages";
 
@@ -71,5 +72,36 @@ export const login = (username, password) => dispatch => {
       dispatch({
         type: LOGIN_FAIL
       });
+    });
+};
+
+export const logout = () => (dispatch, getState) => {
+  //   get Token
+  const token = getState().auth.token;
+
+  // Headers
+  const config = {
+    "Content-Type": "application/json",
+    headers: {}
+  };
+
+  //   if Token exists add to headers
+  console.log(token);
+
+  if (token) {
+    config.headers["Authorization"] = `Token ${token}`;
+  }
+
+  axios
+    .get("/api/auth/logout", null, config)
+    .then(res => {
+      dispatch({
+        type: LOGOUT_SUCCESS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({ type: AUTH_ERROR });
     });
 };

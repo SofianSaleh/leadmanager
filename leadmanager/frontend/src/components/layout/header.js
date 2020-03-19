@@ -1,8 +1,38 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from "../../actions/auth";
 
 export class Header extends Component {
+  static propTypes = {
+    auth: PropTypes.object.isRequired
+  };
   render() {
+    const authLinks = (
+      <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li className="nav-item">
+          <button className="nav-link btn btn-info btn-sm text-light">
+            Logout
+          </button>
+        </li>
+      </ul>
+    );
+    const guestLinks = (
+      <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li className="nav-item">
+          <Link to="/login" className="nav-link">
+            Login
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/register" className="nav-link">
+            Register
+          </Link>
+        </li>
+      </ul>
+    );
+    const { isAuthenticated, user } = this.props.auth;
     return (
       <div className="container">
         <nav className="navbar navbar-expand-sm navbar-light bg-light">
@@ -21,18 +51,7 @@ export class Header extends Component {
             <a className="navbar-brand" href="#">
               Lead Manager
             </a>
-            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
-              <li className="nav-item">
-                <Link to="/login" className="nav-link">
-                  Login
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/register" className="nav-link">
-                  Register
-                </Link>
-              </li>
-            </ul>
+            {isAuthenticated ? authLinks : guestLinks}
           </div>
         </nav>
       </div>
@@ -40,4 +59,8 @@ export class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(Header);
