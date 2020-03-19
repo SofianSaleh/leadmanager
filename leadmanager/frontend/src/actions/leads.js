@@ -1,11 +1,12 @@
 import axios from "axios";
 import { GET_LEADS, DELETE_LEAD, ADD_LEAD, GET_ERRORS } from "./types";
 import { createMessage, returnErrors } from "./messages";
-// Get Leads
+import { tokenConfig } from "./auth";
 
-export const getLeads = () => dispatch => {
+// Get Leads
+export const getLeads = () => (dispatch, getState) => {
   axios
-    .get("/api/leads")
+    .get("/api/leads", tokenConfig(getState))
     .then(res => {
       dispatch({ type: GET_LEADS, payload: res.data });
     })
