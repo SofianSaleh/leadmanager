@@ -15,7 +15,6 @@ export class Form extends Component {
   };
 
   onChange(e) {
-    console.log(this);
     this.setState({ [e.target.name]: e.target.value });
   }
 

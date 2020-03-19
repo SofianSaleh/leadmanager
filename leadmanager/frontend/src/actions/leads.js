@@ -17,21 +17,21 @@ export const getLeads = () => (dispatch, getState) => {
 
 //Delete Lead
 
-export const deleteLead = id => dispatch => {
+export const deleteLead = id => (dispatch, getState) => {
   axios
-    .delete(`/api/leads/${id}/`)
+    .delete(`/api/leads/${id}/`, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ deleteLead: "Lead Deleted" }));
       dispatch({ type: DELETE_LEAD, payload: id });
     })
-    .catch(e => {
+    .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
     });
 };
 
-export const addLead = lead => dispatch => {
+export const addLead = lead => (dispatch, getState) => {
   axios
-    .post(`/api/leads/`, lead)
+    .post(`/api/leads/`, lead, tokenConfig(getState))
     .then(res => {
       dispatch(createMessage({ addLead: "Lead Added" }));
       dispatch({ type: ADD_LEAD, payload: res.data });
