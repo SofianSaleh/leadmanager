@@ -19,17 +19,19 @@ export const loadUser = () => (dispatch, getState) => {
 
   // Headers
   const config = {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    headers: {}
   };
 
   //   if Token exists add to headers
+  console.log(token);
 
   if (token) {
     config.headers["Authorization"] = `Token ${token}`;
   }
 
   axios
-    .get("/api/auth/user/", config)
+    .get("/api/auth/user", config)
     .then(res => {
       dispatch({
         type: USER_LOADED,
@@ -42,14 +44,18 @@ export const loadUser = () => (dispatch, getState) => {
     });
 };
 
+// LOGIN USER
 export const login = (username, password) => dispatch => {
   // Headers
   const config = {
-    "Content-Type": "application/json"
+    headers: {
+      "Content-Type": "application/json"
+    }
   };
-  //   request body
+
+  // Request Body
   const body = JSON.stringify({ username, password });
-  console.log(body);
+
   axios
     .post("/api/auth/login", body, config)
     .then(res => {
@@ -60,7 +66,10 @@ export const login = (username, password) => dispatch => {
       });
     })
     .catch(err => {
+      console.log(err);
       dispatch(returnErrors(err.response.data, err.response.status));
-      dispatch({ type: LOGIN_FAIL });
+      dispatch({
+        type: LOGIN_FAIL
+      });
     });
 };
