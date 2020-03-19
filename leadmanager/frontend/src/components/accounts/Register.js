@@ -31,7 +31,7 @@ export default class Register extends Component {
                 type="text"
                 className="form-control"
                 name="username"
-                onChange={this.onChange}
+                onChange={this.onChange.bind(this)}
                 value={username}
               />
             </div>
@@ -41,7 +41,7 @@ export default class Register extends Component {
                 type="email"
                 className="form-control"
                 name="email"
-                onChange={this.onChange}
+                onChange={this.onChange.bind(this)}
                 value={email}
               />
             </div>
@@ -51,7 +51,7 @@ export default class Register extends Component {
                 type="password"
                 className="form-control"
                 name="password"
-                onChange={this.onChange}
+                onChange={this.onChange.bind(this)}
                 value={password}
               />
             </div>
@@ -61,7 +61,7 @@ export default class Register extends Component {
                 type="password"
                 className="form-control"
                 name="confirmPassword"
-                onChange={this.onChange}
+                onChange={this.onChange.bind(this)}
                 value={confirmPassword}
               />
             </div>
